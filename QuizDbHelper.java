@@ -42,4 +42,26 @@ public class QuizDbHelper extends SQLiteOpenHelper {
 
 
     }
+    private void fillQuestionsTable() {
+        Question q1 = new Question("A is correct", "A", "B", "C", 1);
+        addQuestion(q1);
+        Question q2 = new Question("B is correct", "A", "B", "C", 2);
+        addQuestion(q2);
+        Question q3 = new Question("C is correct", "A", "B", "C", 3);
+        addQuestion(q3);
+        Question q4 = new Question("A is correct again", "A", "B", "C", 1);
+        addQuestion(q4);
+        Question q5 = new Question("B is correct again", "A", "B", "C", 2);
+        addQuestion(q5);
+    }
+
+    private void addQuestion(Question question) {
+        ContentValues cv = new ContentValues();
+        cv.put(QuizContract.QuestionsTable.COLUMN_QUESTION, question.getQuestion());
+        cv.put(QuizContract.QuestionsTable.COLUMN_OPTION1, question.getOption1());
+        cv.put(QuizContract.QuestionsTable.COLUMN_OPTION2, question.getOption2());
+        cv.put(QuizContract.QuestionsTable.COLUMN_OPTION3, question.getOption3());
+        cv.put(QuizContract.QuestionsTable.COLUMN_ANSWER_NR, question.getAnswerNr());
+        db.insert(QuizContract.QuestionsTable.TABLE_NAME, null, cv);
+    }
 }
